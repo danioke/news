@@ -51,8 +51,7 @@ function recent_post_content() {
     var s = "<div id='recent_post','watch'>";
     if (info_text) {
         s += "<div class='wrapper'>";
-        s += "<div class='newstitle'>";
-       
+           
         s += "</div>";
     }
     s += "  <marquee style='float:left; margin-left:10px; width:82%' scrollAmount='" + scrolling_speed + "'>";
