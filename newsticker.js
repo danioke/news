@@ -1,6 +1,16 @@
+/* Predefined Variables Are:
+ *     blog_url
+ *     latest_post
+ *     background_color
+ *     border_color
+ *     scrolling_speed
+ *     info_text
+ *     close_button
+ *     WWW.IDBLANTER.COM
+ */
 var entries; var feed;
 var feed_url = blog_url.match(/\/$/) ? blog_url : blog_url + "/";
-feed_url += "feeds/posts/default";
+feed_url += "feeds/posts/default/-/Terkini";
 function recent_post_createEntries() {
     var entries = feed.entry;
     var entriesArr = [];
@@ -42,15 +52,17 @@ function recent_post_style() {
     s += "#recent_post{";
     s += "margin:0px;";
     s += "width:auto;";
+    s += "background:#fff;";
     s += "}";
     s += "</style>";
     document.write(s);
 }
 function recent_post_content() {
-    var s = "<div id='recent_post'>";
+    var s = "<div id='recent_post' title='Breaking News'>";
     if (info_text) {
         s += "<div class='wrapper'>";
-           
+        s += "<div class='newstitle'>";
+        s += "Breaking News";
         s += "</div>";
     }
     s += "  <marquee style='float:left; margin-left:10px; width:82%' scrollAmount='" + scrolling_speed + "'>";
