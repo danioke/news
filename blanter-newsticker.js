@@ -69,7 +69,7 @@ function recent_post_content() {
         s += "<a href='" + recent_post_entries.href + "' ";
         s += "onmouseover='this.parentNode.stop()' onmouseout='this.parentNode.start()'";
         s += ">" + recent_post_entries.title + "</a>";
-        if (i != latest_post - 1) { s += " | "; }
+        if (i != latest_post - 1) { s += " <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgTOIXkzAAX9MrkM767tzxjWSlF0DVq0jNyWMiRUcJT5tPPxB4zPdTCa5Ds4nzH5jLm1HT6IuS7ScF4W4sqf3MtUmMmRimU3yhFvZo761q0sbZWjG6jPRfPstDNURLQmLGfG5XLAA1c7ngfCukQ8Fdtd8V_z5V63wji732vayS5Cqm08X4lcIKcIQ=w20-h20"/> "; }
     }
     s += "</marquee>";
     s += "</div>";
