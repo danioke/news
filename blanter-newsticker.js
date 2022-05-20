@@ -9,76 +9,78 @@
  *     WWW.IDBLANTER.COM
  */
 var entries; var feed;
-var feed_url = blog_url.match(/\/$/) ? blog_url : blog_url + "/";
-feed_url += "feeds/posts/default/-/Terkini";
-function recent_post_createEntries() {
+var feed_url = blog_url.match(/\/$/) ? blog_url : blog_url+"/";
+feed_url += "feeds/posts/default";
+function recent_post_createEntries(){
     var entries = feed.entry;
     var entriesArr = [];
-    for (var i = 0; i < latest_post; i++) {
+    for(var i=0; i<latest_post; i++){
         var entry = entries[i];
         var entryObj = new Object();
         entryObj.title = entry.title.$t;
-        entryObj.href = getHref(entry.link);
+        entryObj.href  = getHref(entry.link);
         entriesArr.push(entryObj);
     }
     return entriesArr;
 }
-function getBlogTitle() {
+function getBlogTitle(){
     return feed.title.$t;
 }
-function getBlogURL() {
+function  getBlogURL(){
     return getHref(feed.link);
 }
-function getHref(links) {
-    for (var i = 0; i < links.length; i++) {
+function getHref(links){
+    for(var i=0; i<links.length; i++){
         var link = links[i];
-        if (link.rel == "alternate") { return link.href; }
+        if(link.rel == "alternate"){return link.href;}
     }
     return null;
 }
-function recent_post_start(json) {
+function recent_post_start(json){
     feed = json.feed;
     entries = recent_post_createEntries();
     recent_post_style();
     recent_post_content();
 }
-function recent_post_text() {
-    var src = feed_url + "?alt=json-in-script&callback=recent_post_start&max-results=" + latest_post;
-    var s = "<script src='" + src + "'></script>";
+function recent_post_text(){
+    var src = feed_url+"?alt=json-in-script&callback=recent_post_start&max-results="+latest_post;
+    var s = "<script src='"+src+"'></script>";
     document.write(s);
 }
-function recent_post_style() {
+function recent_post_style(){
     var s = "<style type='text/css'>";
     s += "#recent_post{";
     s += "margin:0px;";
     s += "width:auto;";
+    s += "background:#fff;";
     s += "}";
     s += "</style>";
     document.write(s);
 }
-function recent_post_content() {
-    var s = "<div id='recent_post'>";
-    if (info_text) {
-        s += "<div class='wrapper'>";
-        s += "<div class='newstitle'>";
-        s += "</div>";
+function recent_post_content(){
+    var s = "<div id='recent_post' title='Breaking News'>";
+    if(info_text){
+    s += "<div class='wrapper'>";
+    s += "<div class='newstitle'>";
+    s += "Breaking News";
+    s += "</div>";
     }
-    s += "  <marquee style='float:left; margin-left:10px; width:82%' scrollAmount='" + scrolling_speed + "'>";
-    for (var i = 0; i < latest_post; i++) {
+    s += "  <marquee style='float:left; margin-left:10px; width:82%' scrollAmount='"+scrolling_speed+"'>";
+    for(var i=0; i<latest_post; i++){
         var recent_post_entries = entries[i];
-        s += "<a href='" + recent_post_entries.href + "' ";
+        s += "<a href='"+recent_post_entries.href+"' ";
         s += "onmouseover='this.parentNode.stop()' onmouseout='this.parentNode.start()'";
         s += ">" + recent_post_entries.title + "</a>";
-        if (i != latest_post - 1) { s += " <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgTOIXkzAAX9MrkM767tzxjWSlF0DVq0jNyWMiRUcJT5tPPxB4zPdTCa5Ds4nzH5jLm1HT6IuS7ScF4W4sqf3MtUmMmRimU3yhFvZo761q0sbZWjG6jPRfPstDNURLQmLGfG5XLAA1c7ngfCukQ8Fdtd8V_z5V63wji732vayS5Cqm08X4lcIKcIQ=w20-h20"/> "; }
+        if(i != latest_post-1){s += " | ";}
     }
     s += "</marquee>";
     s += "</div>";
-    if (close_button) {
-        s += "<div style='float:right;margin-right:15px;'>";
-        s += "<a href='javascript:void(0)' onclick='document.getElementById(\"recent_post\").style.display=\"none\"'>";
-        s += "(x)";
-        s += "</a>";
-        s += "</div>";
+    if(close_button){
+	s += "<div style='float:right;margin-right:15px;'>";
+    s += "<a href='javascript:void(0)' onclick='document.getElementById(\"recent_post\").style.display=\"none\"'>";
+    s += "(x)";
+    s += "</a>";
+    s += "</div>";
     }
     document.write(s);
 }
